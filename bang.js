@@ -14,8 +14,50 @@
     const particles = [];
     let flash = 0;
     let animating = false;
+    let audioCtx;
+
+    function getAudioCtx() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        return audioCtx;
+    }
+
+    function makeNoise(ac, duration) {
+        const len = ac.sampleRate * duration;
+        const buf = ac.createBuffer(1, len, ac.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+        return buf;
+    }
+
+    // --- Thunder crack ---
+    function soundThunder() {
+        const ac = getAudioCtx(), now = ac.currentTime;
+
+        // Rolling thunder — multiple overlapping rumbles
+        for (let j = 0; j < 3; j++) {
+            const delay = 0.05 + j * 0.2 + Math.random() * 0.1;
+            const dur = 0.6 + Math.random() * 0.5;
+            const r = ac.createBufferSource();
+            r.buffer = makeNoise(ac, dur);
+            const rg = ac.createGain();
+            rg.gain.setValueAtTime(0.001, now + delay);
+            rg.gain.linearRampToValueAtTime(0.25 - j * 0.06, now + delay + 0.03);
+            rg.gain.exponentialRampToValueAtTime(0.001, now + delay + dur);
+            const rf = ac.createBiquadFilter();
+            rf.type = 'lowpass';
+            rf.frequency.setValueAtTime(400 - j * 80, now);
+            rf.frequency.exponentialRampToValueAtTime(40, now + delay + dur);
+            r.connect(rf).connect(rg).connect(ac.destination);
+            r.start(now + delay); r.stop(now + delay + dur);
+        }
+    }
+
+    function playBoom() {
+        soundThunder();
+    }
 
     function bang(x, y) {
+        playBoom();
         flash = 1;
 
         for (let i = 0; i < 120; i++) {
