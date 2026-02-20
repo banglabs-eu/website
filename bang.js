@@ -52,12 +52,8 @@
         }
     }
 
-    function playBoom() {
-        soundThunder();
-    }
-
     function bang(x, y) {
-        playBoom();
+        soundThunder();
         flash = 1;
 
         for (let i = 0; i < 120; i++) {
