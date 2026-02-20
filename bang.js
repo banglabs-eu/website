@@ -161,8 +161,9 @@
     // Initial bang from center
     bang(w / 2, h / 2);
 
-    // Bang on every click at cursor position
+    // Bang on every click at cursor position (skip interactive elements)
     document.addEventListener('click', function (e) {
+        if (e.target.closest('a, button, .lang-switcher')) return;
         bang(e.clientX, e.clientY);
     });
 })();

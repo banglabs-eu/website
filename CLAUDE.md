@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Landing page website for Bang Labs (bang-labs.eu / bang-labs.com) — an open source software tools company. Repository is at github.com/banglabs-eu/website.git.
+Landing page website for Bang Labs (bang-labs.eu / bang-labs.com) — an open source software company. Repository is at github.com/banglabs-eu/website.git.
 
 ## Tech Stack
 
