@@ -95,6 +95,61 @@
             line-height: 1;
             letter-spacing: 0;
         }
+
+        .glyphclock-footer {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 20;
+            text-decoration: none;
+            opacity: 0;
+            animation: reveal 0.6s ease-out 0.6s forwards;
+        }
+
+        .glyphclock-footer #gc {
+            height: 80px;
+            width: 80px;
+            position: relative;
+        }
+
+        .glyphclock-footer .gc-glyph {
+            position: absolute;
+            font-size: 60px;
+            line-height: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s ease;
+        }
+
+        .glyphclock-footer .gc-1 .gc-glyph:nth-child(1) {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .glyphclock-footer .gc-2 .gc-glyph:nth-child(1) {
+            transform: translate(calc(-50% - 20px), -50%) scale(0.6);
+            opacity: 1;
+        }
+        .glyphclock-footer .gc-2 .gc-glyph:nth-child(2) {
+            transform: translate(calc(-50% + 20px), -50%) scale(0.6);
+            opacity: 1;
+        }
+
+        .glyphclock-footer .gc-3 .gc-glyph:nth-child(1) {
+            transform: translate(-50%, calc(-50% - 15px)) scale(0.425);
+            opacity: 1;
+        }
+        .glyphclock-footer .gc-3 .gc-glyph:nth-child(2) {
+            transform: translate(calc(-50% - 15px), calc(-50% + 12px)) scale(0.425);
+            opacity: 1;
+        }
+        .glyphclock-footer .gc-3 .gc-glyph:nth-child(3) {
+            transform: translate(calc(-50% + 15px), calc(-50% + 12px)) scale(0.425);
+            opacity: 1;
+        }
     </style>
 </head>
 <body data-page="index">
@@ -130,7 +185,36 @@
             </a>
         </div>
     </div>
+    <a class="glyphclock-footer" href="https://glyphclock.bang-labs.eu" target="_blank" rel="noopener" title="GlyphClock">
+        <div id="gc">
+            <span class="gc-glyph"></span>
+            <span class="gc-glyph"></span>
+            <span class="gc-glyph"></span>
+        </div>
+    </a>
+
     <script src="bang.js"></script>
     <script src="i18n.js"></script>
+    <script>
+    (function () {
+        var S = ['\u{1F950}','\u{1F98B}','\u{1F337}','\u2602\uFE0F','\u{1F335}','\u{1F388}','\u{1F453}','\u2693','\u{1F99A}','\u{1F916}','\u2B50','\u2601\uFE0F','\u{1F332}','\u{1FA81}','\u{1FA91}','\u267B'];
+        var el = document.getElementById('gc');
+        var spans = el.querySelectorAll('.gc-glyph');
+        function update() {
+            var now = new Date();
+            var m = now.getUTCHours() * 60 + now.getUTCMinutes();
+            var block = Math.min(Math.floor(m / 90), 15);
+            var sub = Math.min(Math.floor((m % 90) / 30), 2);
+            var glyph = S[block];
+            var count = sub + 1;
+            for (var i = 0; i < 3; i++) spans[i].textContent = glyph;
+            el.className = 'gc-' + count;
+        }
+        update();
+        var now = new Date();
+        var secsIntoBlock = (now.getUTCMinutes() % 30) * 60 + now.getUTCSeconds();
+        setTimeout(function () { update(); setInterval(update, 30 * 60000); }, (30 * 60 - secsIntoBlock) * 1000);
+    })();
+    </script>
 </body>
 </html>
