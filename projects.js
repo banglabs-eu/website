@@ -56,6 +56,16 @@
         }
     ];
 
+    // The modal reuses one <img>, so swapping .src mid-session would keep
+    // showing the previous project's picture until the new one finishes
+    // loading. Preloading every screenshot up front (they're tiny webp
+    // files) means the browser cache always has them ready, so the swap
+    // is instant with no stale-image flash.
+    PROJECTS.forEach(function (project) {
+        var preload = new Image();
+        preload.src = project.shot;
+    });
+
     var grid = document.getElementById('project-links');
     var modal = document.getElementById('project-modal');
     var modalIcon = document.getElementById('project-modal-icon');
