@@ -98,14 +98,6 @@
             fill: currentColor;
         }
 
-        .logo-text {
-            font-family: monospace;
-            font-size: 0.85rem;
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: 0;
-        }
-
         .glyphclock-footer {
             position: fixed;
             bottom: 1.5rem;
@@ -163,50 +155,51 @@
     </style>
 </head>
 <body data-page="index">
-    <canvas id="bang"></canvas>
-    <div class="bg-glow bg-glow--1"></div>
-    <div class="bg-glow bg-glow--2"></div>
+    <div class="hero">
+        <canvas id="bang"></canvas>
+        <div class="bg-glow bg-glow--1"></div>
+        <div class="bg-glow bg-glow--2"></div>
 
-    <div class="container">
-        <h1>Bang-Labs.eu</h1>
-        <p class="tagline">
-            <span data-i18n="tagline.line1">Open source projects.</span><br>
-            <span data-i18n="tagline.line2">Built in public.</span><br>
-            <span data-i18n="tagline.line3">Contributions welcome.</span>
-        </p>
-        <div class="links">
-            <a href="https://snippets.eu" target="_blank" rel="noopener">
-                <span class="logo-text">{S}</span>
-                Snippets
-            </a>
-            <a href="https://presence.bang-labs.eu" target="_blank" rel="noopener">
-                <span class="logo-text">{P}</span>
-                Presence
-            </a>
-            <a href="https://glyphclock.bang-labs.eu" target="_blank" rel="noopener">
-                <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
-                GlyphClock
-            </a>
-            <a href="https://branchess.bang-labs.eu" target="_blank" rel="noopener">
-                <span class="logo-text">{♗}</span>
-                Branchess
-            </a>
-            <a href="https://finance.bang-labs.eu" target="_blank" rel="noopener">
-                <span class="logo-text">{€}</span>
-                Finance
-            </a>
-        </div>
-        <div class="links" style="margin-top: 0.75rem;">
-            <a href="https://github.com/banglabs-eu/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.63 7.63 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                <span data-i18n="link.github">GitHub</span>
-            </a>
-            <a href="https://www.linkedin.com/in/akjems/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
-                <span data-i18n="link.linkedin">LinkedIn</span>
-            </a>
+        <div class="container">
+            <h1>Bang-Labs.eu</h1>
+            <p class="tagline">
+                <span data-i18n="tagline.line1">Open source projects.</span><br>
+                <span data-i18n="tagline.line2">Built in public.</span><br>
+                <span data-i18n="tagline.line3">Contributions welcome.</span>
+            </p>
+            <div class="links">
+                <a href="https://github.com/banglabs-eu/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.63 7.63 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                    <span data-i18n="link.github">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/akjems/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+                    <span data-i18n="link.linkedin">LinkedIn</span>
+                </a>
+            </div>
         </div>
     </div>
+
+    <section class="projects" id="projects" aria-label="Projects">
+        <h2 class="projects__heading">Projects</h2>
+        <p class="projects__subheading">Open source, built in public. Pick one to learn more.</p>
+        <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <div class="project-modal" id="project-modal" hidden>
+        <div class="project-modal__backdrop" data-close></div>
+        <div class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-name">
+            <button class="project-modal__close" data-close aria-label="Close">&times;</button>
+            <div class="project-modal__header">
+                <span class="project-modal__icon" id="project-modal-icon"></span>
+                <span class="project-modal__name" id="project-modal-name"></span>
+            </div>
+            <img class="project-modal__shot" id="project-modal-shot" src="" alt="">
+            <p class="project-modal__desc" id="project-modal-desc"></p>
+            <a class="project-modal__link" id="project-modal-link" href="#" target="_blank" rel="noopener">Visit &rarr;</a>
+        </div>
+    </div>
+
     <a class="glyphclock-footer" href="https://glyphclock.bang-labs.eu" target="_blank" rel="noopener" title="GlyphClock">
         <div id="gc">
             <span class="gc-glyph"></span>
@@ -217,6 +210,7 @@
 
     <script src="bang.js"></script>
     <script src="i18n.js"></script>
+    <script src="projects.js"></script>
     <script>
     (function () {
         var S = ['\u{1F950}','\u{1F98B}','\u{1F337}','\u2602\uFE0F','\u{1F335}','\u{1F388}','\u{1F453}','\u2693','\u{1F99A}','\u{1F916}','\u2B50','\u2601\uFE0F','\u{1F332}','\u{1FA81}','\u{1FA91}','\u267B'];

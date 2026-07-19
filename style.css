@@ -9,10 +9,14 @@ body {
     background: #0a0a0f;
     color: #e0e0e8;
     min-height: 100vh;
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
 .bg-glow {
@@ -124,4 +128,207 @@ canvas#bang {
 
 .lang-switcher__option--active {
     color: #6366f1;
+}
+
+/* Projects */
+.projects {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+}
+
+.projects__heading {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #f0f0f5;
+    margin-bottom: 0.5rem;
+}
+
+.projects__subheading {
+    text-align: center;
+    color: #9ca3b0;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    text-align: left;
+    background: rgba(20, 20, 32, 0.6);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 12px;
+    padding: 1.25rem;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.6);
+    transform: translateY(-2px);
+}
+
+.project-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.4rem;
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #c7d2fe;
+}
+
+.project-card__name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f0f0f5;
+}
+
+.project-card__blurb {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #9ca3b0;
+}
+
+/* Project modal */
+.project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.project-modal[hidden] {
+    display: none;
+}
+
+.project-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 10, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.project-modal__panel {
+    position: relative;
+    max-width: 640px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #12121c;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: left;
+}
+
+.project-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    background: rgba(20, 20, 32, 0.8);
+    color: #c7d2fe;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.project-modal__close:hover {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.project-modal__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-right: 2.5rem;
+}
+
+.project-modal__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.4rem;
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #c7d2fe;
+}
+
+.project-modal__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f0f0f5;
+}
+
+.project-modal__shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    margin-bottom: 1.25rem;
+}
+
+.project-modal__desc {
+    color: #c3c3cf;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-modal__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    background: #6366f1;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.project-modal__link:hover {
+    background: #4f46e5;
+}
+
+@media (max-width: 640px) {
+    .project-modal__panel {
+        padding: 1.5rem;
+    }
 }
