@@ -56,7 +56,7 @@
         }
     ];
 
-    var grid = document.getElementById('project-grid');
+    var grid = document.getElementById('project-links');
     var modal = document.getElementById('project-modal');
     var modalIcon = document.getElementById('project-modal-icon');
     var modalName = document.getElementById('project-modal-name');
@@ -86,15 +86,13 @@
     }
 
     PROJECTS.forEach(function (project) {
-        var card = document.createElement('button');
-        card.className = 'project-card';
-        card.type = 'button';
-        card.innerHTML =
-            '<span class="project-card__icon">' + project.icon + '</span>' +
-            '<span class="project-card__name">' + project.name + '</span>' +
-            '<span class="project-card__blurb">' + project.blurb + '</span>';
-        card.addEventListener('click', function () { openModal(project); });
-        grid.appendChild(card);
+        var pill = document.createElement('button');
+        pill.type = 'button';
+        pill.innerHTML =
+            '<span class="project-pill__icon">' + project.icon + '</span>' +
+            '<span>' + project.name + '</span>';
+        pill.addEventListener('click', function () { openModal(project); });
+        grid.appendChild(pill);
     });
 
     modal.addEventListener('click', function (e) {
