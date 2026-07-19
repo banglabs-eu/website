@@ -2,7 +2,7 @@
     var PROJECTS = [
         {
             id: 'basen',
-            icon: '\u{1F3AC}',
+            icon: '{B}',
             name: 'Basen',
             blurb: 'Self-hosted AI image & video studio.',
             description: 'A self-hosted AI media studio you run on any always-on machine — a Raspberry Pi works fine — driving a rent-by-the-minute GPU server that does the actual generation. Image generation across multiple models side by side, image-to-video, chat with a local LLM, and a gallery with ratings and albums. Stop the GPU between sessions and you only pay for storage.',
@@ -20,7 +20,7 @@
         },
         {
             id: 'branchess',
-            icon: '♗',
+            icon: '{♗}',
             name: 'Branchess',
             blurb: 'Chess study tool with a branching game tree.',
             description: 'Explore opening variations, annotate moves, and analyze positions with Stockfish 18 running at full strength in your browser. 171 built-in openings with master-game statistics, Syzygy endgame tablebases, and Lichess game/study import — free, and it runs entirely client-side.',
@@ -47,7 +47,7 @@
         },
         {
             id: 'glyphclock',
-            icon: '\u{1F550}',
+            icon: '{G}',
             name: 'GlyphClock',
             blurb: 'A slower rhythm for the day.',
             description: 'The day is divided into 16 blocks of 90 minutes, each shown as a unique emoji glyph — one, two, or three copies mark the 30-minute phase within it. The time is the same everywhere in the world, but what each glyph means becomes personal. Set a focus text that stays visible beneath the clock.',
