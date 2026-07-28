@@ -46,6 +46,15 @@
             url: 'https://presence.bang-labs.eu'
         },
         {
+            id: 'polyglot',
+            icon: '{7}',
+            name: 'Polyglot',
+            blurb: 'Feel the grammar of seven languages, one puzzle at a time.',
+            description: 'Drag scrambled, colour-coded word tiles into the correct order for English, Danish, German, Spanish, French, Polish, or Japanese — and watch where each language parks its verb, adverb, or negation. Grammar puzzles across 8 lessons plus a vocabulary mode, each solve revealing the underlying structural rule and a literal gloss.',
+            shot: 'screenshots/polyglot.webp',
+            url: 'https://polyglot.bang-labs.eu'
+        },
+        {
             id: 'glyphclock',
             icon: '{G}',
             name: 'GlyphClock',

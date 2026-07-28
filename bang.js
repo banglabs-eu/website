@@ -161,9 +161,11 @@
     // Initial bang from center
     bang(w / 2, h / 2);
 
-    // Bang on every click at cursor position (skip interactive elements)
+    // Bang on every click at cursor position (skip interactive elements
+    // and the project modal — taps while reading/scrolling it shouldn't
+    // each spawn a hidden particle burst + audio synthesis underneath it)
     document.addEventListener('click', function (e) {
-        if (e.target.closest('a, button, .lang-switcher')) return;
+        if (e.target.closest('a, button, .lang-switcher, .project-modal')) return;
         bang(e.clientX, e.clientY);
     });
 })();
