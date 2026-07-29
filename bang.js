@@ -52,8 +52,8 @@
         }
     }
 
-    function bang(x, y) {
-        soundThunder();
+    function bang(x, y, silent) {
+        if (!silent) soundThunder();
         flash = 1;
 
         for (let i = 0; i < 120; i++) {
@@ -158,8 +158,11 @@
         }
     }
 
-    // Initial bang from center
-    bang(w / 2, h / 2);
+    // Initial bang from center. Silent: no user gesture has happened yet,
+    // so the browser would block audio playback anyway — synthesizing it
+    // (AudioContext + noise buffers) would just be wasted work on the
+    // critical page-load path for no audible effect.
+    bang(w / 2, h / 2, true);
 
     // Bang on every click at cursor position (skip interactive elements
     // and the project modal — taps while reading/scrolling it shouldn't

@@ -34,3 +34,23 @@ Playwright's WebKit browser + `install-deps` (passwordless sudo works on this ho
 specifically to get a real WebKit engine for this repro, since Chromium wouldn't
 reproduce a WebKit-specific interaction bug. Fix: `bang.js`'s click listener now
 also skips `.project-modal`.
+
+## 2026-07-29 — Slow initial load on iOS: skip audio synthesis on the automatic page-load bang
+User reported bang-labs.eu "quite slow to load" on iOS after the above fixes shipped
+(distinct from the earlier freeze — that stayed fixed). `bang.js` fires an automatic
+`bang()` from the center of the screen on every page load, and `bang()` unconditionally
+calls `soundThunder()`, which creates a `Web Audio` `AudioContext` and synthesizes three
+noise buffers (~40ms of synchronous work measured in WebKit on this host, generating
+buffers directly with `Math.random()` in a loop) — all before any user gesture. Browsers
+require a user gesture before audio can play, so this initial synthesis is entirely
+wasted work with zero audible effect, sitting on the critical page-load path. iOS
+Safari's `AudioContext`/`AVAudioSession` initialization is documented to be
+substantially heavier than desktop/Android and isn't reproducible in this sandboxed
+Linux WebKit build (no real audio backend), so the real-device cost is likely much
+higher than the ~40ms measured here. Fix: `bang(x, y, silent)` now takes a `silent`
+flag; the automatic load-time bang passes `true` and skips `soundThunder()` entirely.
+Click-triggered bangs are unaffected (verified: 0 `AudioContext`s created on load, 1
+created after the first click). Also re-encoded `screenshots/polyglot.webp`
+(quality 90 → 70, `method=6`): 55KB → 34KB, in line with the other five screenshots
+(4–24KB) that get eagerly preloaded on every page load via `projects.js`; visually
+identical at normal viewing size.
