@@ -62,6 +62,15 @@
             description: 'The day is divided into 16 blocks of 90 minutes, each shown as a unique emoji glyph — one, two, or three copies mark the 30-minute phase within it. The time is the same everywhere in the world, but what each glyph means becomes personal. Set a focus text that stays visible beneath the clock.',
             shot: 'screenshots/glyphclock.webp',
             url: 'https://glyphclock.bang-labs.eu'
+        },
+        {
+            id: 'rf',
+            icon: '{R}',
+            name: 'RF',
+            blurb: 'One board for everything you are working on.',
+            description: 'Recorded Flow keeps every piece of work in one of four states — to do, in progress, recurring, done — and points at wherever the work actually happens: GitHub, Confluence, Jira, Google Docs, OneDrive, the work USB. Epics hold tasks and tasks hold subtasks, all three carrying the same properties, and any single property can be annotated with its own note. A board, a continuously scrolling calendar, and an optional mirror into Google Calendar.',
+            shot: 'screenshots/rf.webp',
+            url: 'https://rf.bang-labs.eu'
         }
     ];
 
