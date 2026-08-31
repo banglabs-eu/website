@@ -24,32 +24,6 @@
     };
 
     var T = {
-        'tagline.line1': {
-            en: 'Independent digital lab.',
-            bg: 'Независима дигитална лаборатория.',
-            hr: 'Nezavisni digitalni laboratorij.',
-            cs: 'Nezávislá digitální laboratoř.',
-            da: 'Uafhængigt digitalt laboratorium.',
-            nl: 'Onafhankelijk digitaal lab.',
-            et: 'Sõltumatu digilabor.',
-            fi: 'Riippumaton digitaalinen laboratorio.',
-            fr: 'Laboratoire numérique indépendant.',
-            de: 'Unabhängiges digitales Labor.',
-            el: 'Ανεξάρτητο ψηφιακό εργαστήριο.',
-            hu: 'Független digitális labor.',
-            ga: 'Saotharlann dhigiteach neamhspleách.',
-            it: 'Laboratorio digitale indipendente.',
-            lv: 'Neatkarīga digitālā laboratorija.',
-            lt: 'Nepriklausoma skaitmeninė laboratorija.',
-            mt: 'Laboratorju diġitali indipendenti.',
-            pl: 'Niezależne cyfrowe laboratorium.',
-            pt: 'Laboratório digital independente.',
-            ro: 'Laborator digital independent.',
-            sk: 'Nezávislé digitálne laboratórium.',
-            sl: 'Neodvisni digitalni laboratorij.',
-            es: 'Laboratorio digital independiente.',
-            sv: 'Oberoende digitalt labb.'
-        },
         'tagline.line2': {
             en: 'Exploring ideas in code.',
             bg: 'Изследване на идеи в код.',
