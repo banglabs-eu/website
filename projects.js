@@ -4,8 +4,8 @@
             id: 'snippets',
             icon: '{S}',
             name: 'Snippets',
-            blurb: 'Note-taking for people who care where their knowledge comes from.',
-            description: 'Capture notes with sources, citations, and tags — every note can be traced back to where it came from. Sign in once and take notes anywhere: web app or CLI, with invite-gated registration, Google sign-in, or a passwordless magic link. Browse what others have chosen to publish in the public knowledge base.',
+            blurb: 'Universal context — the meeting ground between you and every LLM you use.',
+            description: 'One knowledge base that both you and your models read from. Notes carry their sources, citations, and tags, so every claim can be traced back to where it came from — and any AI client that speaks MCP works with those same notes over an OAuth-protected connection, instead of being re-briefed from scratch in every new chat. Capture from the web app or the CLI, sign in with Google or a passwordless magic link, and publish what you want others to see in the public knowledge base.',
             shot: 'screenshots/snippets.webp',
             url: 'https://snippets.eu'
         },
