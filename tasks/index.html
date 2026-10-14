@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks — Tasks everything you do</title>
+    <meta name="description" content="Tasks is a to-do list built on your knowledge base. Set a date, break it into steps, or hand a task to an AI that does the work and writes the result back into it.">
+    <link rel="canonical" href="https://bang-labs.eu/tasks/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tasks — Tasks everything you do">
+    <meta property="og:description" content="A to-do list built on your knowledge base. Set a date, break it into steps, or hand a task to an AI that does the work and writes the result back into it.">
+    <meta property="og:url" content="https://bang-labs.eu/tasks/">
+    <meta property="og:site_name" content="Bang Labs">
+    <meta property="og:locale" content="en_US">
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Tasks, Snippets, to-do, reminders, AI agent, assign task to AI, knowledge base, tags, Bang Labs">
+    <meta name="author" content="Bang Labs">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Tasks",
+        "applicationCategory": "ProductivityApplication",
+        "url": "https://bang-labs.eu/tasks/",
+        "description": "A to-do list built on your knowledge base. Set a date, break it into steps, or hand a task to an AI that does the work and writes the result back into it.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Bang Labs",
+            "url": "https://bang-labs.eu"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/product.css">
+</head>
+<body data-page="tasks">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+
+    <main class="page">
+        <a class="page__home" href="/">&#8592; Bang Labs</a>
+
+        <header class="mast">
+            <span class="mast__mark">{T}</span>
+            <h1 class="mast__slogan">Tasks everything you do.</h1>
+            <p class="mast__lede">
+                A to-do list that lives in your knowledge base instead of beside
+                it. Remind yourself, or hand the task to an AI and get the work
+                back where you keep everything else.
+            </p>
+            <div class="cta">
+                <a class="cta--primary" href="https://snippets.eu/app/tasks">Open Tasks &rarr;</a>
+                <a class="cta--ghost" href="/snippets/">Snippets &rarr;</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <span class="section__kicker">What it is</span>
+            <h2>A task is a snippet with a tag</h2>
+            <p>
+                There is no second app and no second database. A task is one of
+                your snippets, marked as something to do. That sounds like an
+                implementation detail and it is the whole design: everything
+                that already works on a snippet works on a task.
+            </p>
+            <p>
+                Tag it, search it, cite it in a post, read it from any client,
+                attach a file to it. The date is a tag. Done is a tag. The steps
+                are the bullet points in the body. Nothing about a task is a
+                field only one app understands.
+            </p>
+            <div class="anatomy">
+                <div class="anatomy__line">Draft the Q4 narrative for the board deck</div>
+                <div class="anatomy__gap"></div>
+                <div class="anatomy__line">- [x] pull the revenue numbers</div>
+                <div class="anatomy__line">- [ ] write the three-paragraph summary</div>
+                <div class="anatomy__line">- [ ] get the CFO to read it</div>
+                <div class="anatomy__gap"></div>
+                <div class="anatomy__tags"><span class="anatomy__tag">task</span><span class="anatomy__tag">2026-10-20</span><span class="anatomy__tag">board</span><span class="anatomy__tag">finance</span></div>
+            </div>
+            <p>
+                And because a task is a snippet, your to-do list and your notes
+                are searchable together. The task that says <em>write the
+                summary</em> sits one tag away from every snippet you collected
+                in order to write it.
+            </p>
+        </section>
+
+        <section class="section">
+            <span class="section__kicker">Key feature</span>
+            <h2>Reminders, dates and steps</h2>
+            <p>
+                Give a task a date and it shows up when it is due. Break it into
+                steps and tick them off as you go — the steps are ordinary
+                bullets, so you can write them in the terminal, dictate them to
+                an assistant, or type them in the app, and they are the same
+                steps.
+            </p>
+            <p>
+                Closing a task does not delete it. It stays in the library as a
+                record of what was done, next to the work it produced.
+            </p>
+            <div class="cards">
+                <div class="card">
+                    <h3>Dated</h3>
+                    <p>One date per task, as a tag. Re-dating it is retagging it.</p>
+                </div>
+                <div class="card">
+                    <h3>Follow-ups</h3>
+                    <p>A separate kind for the things that are waiting on someone else.</p>
+                </div>
+                <div class="card">
+                    <h3>Subtasks</h3>
+                    <p>Checkable bullets in the body. Tick one anywhere and it is ticked everywhere.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section__kicker">Key feature</span>
+            <h2>Assign it to an AI</h2>
+            <p>
+                Some tasks you do. Some you describe. Write what you want in
+                plain language, tag it for an agent, and a session starts for
+                that one task — it reads the request, looks through the snippets
+                tagged for that project, does the work, and writes the result
+                back into the task.
+            </p>
+            <p>
+                The result lands <em>inside</em> the task, under what you asked
+                for, so the request and the answer stay in one place. Then the
+                task closes itself. If it could not finish, it says what it
+                needs and stays open for you.
+            </p>
+            <ol class="steps">
+                <li>Write the task. One or two sentences is usually enough.</li>
+                <li>Tag it for the agent — from your phone, mid-walk, with no terminal in hand.</li>
+                <li>It picks the task up, loads the context your tags point at, and works.</li>
+                <li>You come back to the result written into the task, and a closed item.</li>
+            </ol>
+            <p>
+                This is why the knowledge base matters. An agent handed a task
+                with no context asks you everything; an agent pointed at the
+                tags that hold the project already knows what was decided, what
+                was tried, and why something was rejected.
+            </p>
+        </section>
+
+        <section class="section">
+            <span class="section__kicker">Key feature</span>
+            <h2>The work product goes where the work goes</h2>
+            <p>
+                Whatever a task produces — your writing or an agent's — is a
+                snippet in the same library. Tagged, searchable, citable in a
+                post, readable by the next session that works on the same thing.
+            </p>
+            <p>
+                Nothing worth keeping is left in a chat window to be lost when
+                the window closes. A finished task is a durable record: what was
+                asked, what came back, and what was found along the way.
+            </p>
+        </section>
+
+        <section class="section">
+            <span class="section__kicker">Why it feels the same</span>
+            <h2>One interface, two halves</h2>
+            <p>
+                Tasks is a view of the same library, in the same app, with the
+                same chrome — the same tag fields, the same cards, the same
+                swipes, the same words. Moving between what you know and what
+                you do is a tab, not a context switch.
+            </p>
+            <p>
+                It is also the same convention everywhere: because a task is
+                just tags and Markdown, the web app, the terminal client and an
+                AI client over MCP can all create one, date one, and close one.
+                No client needs to be taught a new object.
+            </p>
+            <div class="cards">
+                <div class="card">
+                    <h3>Web</h3>
+                    <p>The Tasks tab, beside your snippets, sources and posts.</p>
+                </div>
+                <div class="card">
+                    <h3>iOS</h3>
+                    <p>A native app for the list in your pocket. In development.</p>
+                </div>
+                <div class="card">
+                    <h3>Agents</h3>
+                    <p>Any MCP client can create a task, read one, or close it.</p>
+                </div>
+            </div>
+            <div class="cta">
+                <a class="cta--primary" href="https://snippets.eu/app/tasks">Open Tasks &rarr;</a>
+                <a class="cta--ghost" href="/snippets/">What Snippets is &rarr;</a>
+            </div>
+        </section>
+
+        <section class="sibling">
+            <p class="sibling__pair">
+                <span>Snippet</span> everything you know.<br>
+                <span>Tasks</span> everything you do.
+            </p>
+            <p>
+                Tasks runs on Snippets. One account, one library, one set of
+                tags — the to-do list and the knowledge base are the same
+                thing seen two ways.
+            </p>
+            <div class="cta">
+                <a class="cta--ghost" href="/snippets/">What Snippets is &rarr;</a>
+            </div>
+        </section>
+
+        <p class="page__foot">
+            A <a href="/">Bang Labs</a> product, built on <a href="/snippets/">Snippets</a>.
+        </p>
+    </main>
+</body>
+</html>

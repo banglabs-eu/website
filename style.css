@@ -214,6 +214,13 @@ canvas#bang {
     color: #f0f0f5;
 }
 
+/* `display: block` in an author stylesheet beats the UA's `[hidden] {
+   display: none }`, so a project with no screenshot needs this rule for
+   `modalShot.hidden = true` to actually hide anything. */
+.project-modal__shot[hidden] {
+    display: none;
+}
+
 .project-modal__shot {
     display: block;
     width: 100%;
@@ -246,6 +253,38 @@ canvas#bang {
 
 .project-modal__link:hover {
     background: #4f46e5;
+}
+
+/* The modal is the informational step; its actions are "open the thing" and,
+   where there is one, "read the longer explanation". */
+.project-modal__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.project-modal__about {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #c7d2fe;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.project-modal__about[hidden] {
+    display: none;
+}
+
+.project-modal__about:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.6);
 }
 
 @media (max-width: 640px) {

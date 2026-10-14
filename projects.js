@@ -4,10 +4,22 @@
             id: 'snippets',
             icon: '{S}',
             name: 'Snippets',
-            blurb: 'Universal context — the meeting ground between you and every LLM you use.',
-            description: 'One knowledge base that both you and your models read from. Notes carry their sources, citations, and tags, so every claim can be traced back to where it came from — and any AI client that speaks MCP works with those same notes over an OAuth-protected connection, instead of being re-briefed from scratch in every new chat. Capture from the web app or the CLI, sign in with Google or a passwordless magic link, and publish what you want others to see in the public knowledge base.',
+            blurb: 'Snippet everything you know.',
+            description: 'One knowledge base that both you and your models read from. Every snippet carries its source, its citation and its tags, so a claim can be traced back to the page it came from — and any AI client that speaks MCP reads those same snippets over a connection you authorise, picking up exactly the tags you point it at instead of being re-briefed in every new chat. Organise by tag rather than by folder, publish long-form posts composed from the snippets they cite, and keep everything else private.',
             shot: 'screenshots/snippets.webp',
-            url: 'https://snippets.eu'
+            url: 'https://snippets.eu',
+            openLabel: 'Open Snippets',
+            about: '/snippets/'
+        },
+        {
+            id: 'tasks',
+            icon: '{T}',
+            name: 'Tasks',
+            blurb: 'Tasks everything you do.',
+            description: 'A to-do list that lives in your knowledge base instead of beside it. A task is a snippet with a tag: the date is a tag, done is a tag, and the steps are the bullet points in the body — so the web app, the terminal and an AI client all handle one without being taught a new object. Set yourself a reminder, or hand the task to an agent: it reads the request, loads the snippets your tags point at, does the work and writes the result back into the task. Same library, same tags, same interface as Snippets.',
+            url: 'https://snippets.eu/app/tasks',
+            openLabel: 'Open Tasks',
+            about: '/tasks/'
         },
         {
             id: 'branchess',
@@ -62,6 +74,7 @@
     // files) means the browser cache always has them ready, so the swap
     // is instant with no stale-image flash.
     PROJECTS.forEach(function (project) {
+        if (!project.shot) return;
         var preload = new Image();
         preload.src = project.shot;
     });
@@ -73,17 +86,41 @@
     var modalShot = document.getElementById('project-modal-shot');
     var modalDesc = document.getElementById('project-modal-desc');
     var modalLink = document.getElementById('project-modal-link');
+    var modalAbout = document.getElementById('project-modal-about');
     var lastFocused = null;
 
     function openModal(project) {
         lastFocused = document.activeElement;
         modalIcon.textContent = project.icon;
         modalName.textContent = project.name;
-        modalShot.src = project.shot;
-        modalShot.alt = project.name + ' screenshot';
+
+        // Not every project has a screenshot (Tasks is a view inside the
+        // Snippets app, not a site of its own). Hiding the one shared <img>
+        // is not enough on its own: leaving a stale .src on it means the
+        // *previous* project's picture is what gets un-hidden next time.
+        if (project.shot) {
+            modalShot.src = project.shot;
+            modalShot.alt = project.name + ' screenshot';
+            modalShot.hidden = false;
+        } else {
+            modalShot.hidden = true;
+            modalShot.removeAttribute('src');
+            modalShot.alt = '';
+        }
+
         modalDesc.textContent = project.description;
         modalLink.href = project.url;
-        modalLink.textContent = 'Visit ' + project.name + ' →';
+        modalLink.textContent = (project.openLabel || 'Visit ' + project.name) + ' →';
+
+        // The informational modal comes first; `about` is the longer read.
+        if (project.about) {
+            modalAbout.href = project.about;
+            modalAbout.textContent = 'What ' + project.name + ' is →';
+            modalAbout.hidden = false;
+        } else {
+            modalAbout.hidden = true;
+        }
+
         modal.hidden = false;
         modal.querySelector('.project-modal__close').focus();
         document.body.style.overflow = 'hidden';
