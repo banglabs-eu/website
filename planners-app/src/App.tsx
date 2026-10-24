@@ -25,7 +25,7 @@ export default function App() {
             <a className="page__home" href="/">&#8592; Bang Labs</a>
 
             <header className="mast">
-                <span className="mast__mark">{'{P}'}</span>
+                <span className="mast__mark">{'{✎}'}</span>
                 <h1 className="mast__slogan">Print the day you plan.</h1>
                 <p className="mast__lede">
                     Paper planners built around GlyphClock time, and a four-month

@@ -65,6 +65,16 @@
             description: 'The day is divided into 16 blocks of 90 minutes, each shown as a unique emoji glyph — one, two, or three copies mark the 30-minute phase within it. The time is the same everywhere in the world, but what each glyph means becomes personal. Set a focus text that stays visible beneath the clock.',
             shot: 'screenshots/glyphclock.webp',
             url: 'https://glyphclock.bang-labs.eu'
+        },
+        {
+            id: 'planners',
+            icon: '{✎}',
+            name: 'Planners',
+            blurb: 'Print the day you plan.',
+            description: 'Paper day planners laid out in GlyphClock blocks instead of clock hours — for one person, for two with a shared column, or folded into a pocket-sized booklet — with every glyph placed for your own time zone. Plus a four-month calendar with Danish holidays, sky events, your own dates and any calendar you export as .ics. Everything is drawn in your browser; nothing you enter leaves it.',
+            shot: 'screenshots/planners.webp',
+            url: '/planners/',
+            openLabel: 'Open Planners'
         }
     ];
 
