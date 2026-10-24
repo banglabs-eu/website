@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planners — Print the day you plan</title>
+    <meta name="description" content="Printable day planners on GlyphClock time and a four-month wall calendar, generated in your browser for your own time zone and dates.">
+    <link rel="canonical" href="https://bang-labs.eu/planners/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Planners — Print the day you plan">
+    <meta property="og:description" content="Printable day planners on GlyphClock time and a four-month calendar, generated in your browser.">
+    <meta property="og:url" content="https://bang-labs.eu/planners/">
+    <meta property="og:site_name" content="Bang Labs">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Bang Labs">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/product.css">
+    <link rel="stylesheet" href="planners.css">
+    <style id="page-size">@page { size: A4 portrait; margin: 0; }</style>
+</head>
+<body data-page="planners">
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+
+    <main class="page page--tool">
+        <a class="page__home" href="/">&#8592; Bang Labs</a>
+
+        <header class="mast">
+            <span class="mast__mark">{P}</span>
+            <h1 class="mast__slogan">Print the day you plan.</h1>
+            <p class="mast__lede">
+                Paper planners built around GlyphClock time, and a four-month
+                calendar with holidays, sky events and your own dates. Generated
+                in your browser — nothing you enter leaves it.
+            </p>
+        </header>
+
+        <nav class="tabs" role="tablist">
+            <button class="tabs__tab" role="tab" data-tab="day" aria-selected="true">Day planners</button>
+            <button class="tabs__tab" role="tab" data-tab="calendar" aria-selected="false">Calendar</button>
+        </nav>
+
+        <!-- ============ Day planners ============ -->
+        <section class="tool" id="tool-day" role="tabpanel">
+            <form class="controls" id="day-form" autocomplete="off">
+                <fieldset class="variants">
+                    <legend>Layout</legend>
+                    <label class="variant">
+                        <input type="radio" name="variant" value="shared" checked>
+                        <span class="variant__name">Shared day</span>
+                        <span class="variant__desc">A4. Two people, a shared column between them.</span>
+                    </label>
+                    <label class="variant">
+                        <input type="radio" name="variant" value="solo">
+                        <span class="variant__name">Solo day</span>
+                        <span class="variant__desc">A4. Plan and actual, side by side.</span>
+                    </label>
+                    <label class="variant">
+                        <input type="radio" name="variant" value="fold">
+                        <span class="variant__name">Pocket fold</span>
+                        <span class="variant__desc">A4 landscape. Folds three times into an A7 booklet.</span>
+                    </label>
+                    <label class="variant">
+                        <input type="radio" name="variant" value="three">
+                        <span class="variant__name">Three days</span>
+                        <span class="variant__desc">A4 landscape, both sides. Three days, folds to A7.</span>
+                    </label>
+                </fieldset>
+
+                <div class="fields">
+                    <label class="field field--wide">
+                        <span>Time zone</span>
+                        <select name="tz" id="tz"></select>
+                    </label>
+                    <label class="field">
+                        <span>For the date</span>
+                        <input type="date" name="date" id="date">
+                    </label>
+                    <p class="field-note field--wide" id="tz-note"></p>
+
+                    <label class="field field--wide" data-for="shared solo">
+                        <span>Title</span>
+                        <input type="text" name="title" maxlength="40">
+                    </label>
+                    <label class="field" data-for="shared">
+                        <span>Left name</span>
+                        <input type="text" name="personL" maxlength="20" placeholder="blank to write in">
+                    </label>
+                    <label class="field" data-for="shared">
+                        <span>Right name</span>
+                        <input type="text" name="personR" maxlength="20" placeholder="blank to write in">
+                    </label>
+                    <label class="field" data-for="shared solo">
+                        <span>First row</span>
+                        <select name="startHour"></select>
+                    </label>
+                    <label class="field" data-for="shared solo">
+                        <span>Last row</span>
+                        <select name="endHour"></select>
+                    </label>
+                    <label class="field" data-for="fold three">
+                        <span>Day starts</span>
+                        <select name="dayStart"></select>
+                    </label>
+                    <label class="field" data-for="shared solo fold">
+                        <span>Pages</span>
+                        <input type="number" name="pages" min="1" max="31" value="2">
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn btn--primary" id="print-day">Print / save PDF</button>
+                    <p class="actions__hint" id="print-hint">Print at 100% scale with no margins. In the dialog, choose “Save as PDF” to keep a file.</p>
+                </div>
+            </form>
+
+            <div class="preview" id="day-preview" aria-label="Preview"></div>
+        </section>
+
+        <!-- ============ Calendar ============ -->
+        <section class="tool" id="tool-calendar" role="tabpanel" hidden>
+            <form class="controls" id="cal-form" autocomplete="off">
+                <fieldset class="variants variants--two">
+                    <legend>Layout</legend>
+                    <label class="variant">
+                        <input type="radio" name="layout" value="four" checked>
+                        <span class="variant__name">Four months</span>
+                        <span class="variant__desc">Two A4 sheets, one A5 month per half, room to write each day.</span>
+                    </label>
+                    <label class="variant">
+                        <input type="radio" name="layout" value="overview">
+                        <span class="variant__name">Overview</span>
+                        <span class="variant__desc">Up to twelve small months on a single A4 page.</span>
+                    </label>
+                </fieldset>
+
+                <div class="fields">
+                    <label class="field">
+                        <span>Start month</span>
+                        <input type="month" name="start" id="cal-start" required>
+                    </label>
+                    <label class="field" data-for="overview">
+                        <span>Months</span>
+                        <input type="number" name="months" min="2" max="12" value="8">
+                    </label>
+                    <label class="field" data-for="overview">
+                        <span>Columns</span>
+                        <input type="number" name="cols" min="1" max="3" value="2">
+                    </label>
+
+                    <label class="field field--wide" data-for="four">
+                        <span>Your dates <small>one per line: <code>2026-12-24 | Juleaften</code></small></span>
+                        <textarea name="dates" rows="5" spellcheck="false" placeholder="2026-11-14 | Mormor 80 år&#10;2027-01-09 | Ski trip"></textarea>
+                    </label>
+                    <label class="field field--wide" data-for="four">
+                        <span>Calendar files <small>.ics exports — each file becomes one coloured calendar, named after the file</small></span>
+                        <input type="file" name="ics" accept=".ics,text/calendar" multiple>
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn--primary" id="cal-generate">Generate PDF</button>
+                    <a class="btn btn--ghost" id="cal-download" hidden download>Download</a>
+                    <p class="actions__hint" id="cal-status">The first run loads a Python runtime (about 15&nbsp;MB) into the page. Later runs are instant.</p>
+                </div>
+            </form>
+
+            <div class="preview preview--pdf" id="cal-preview" hidden>
+                <iframe id="cal-frame" title="Calendar preview"></iframe>
+            </div>
+
+            <div class="section about">
+                <span class="section__kicker">What is on it</span>
+                <p>
+                    Weeks run Monday to Sunday under Japanese day kanji, with ISO week
+                    numbers and the two-week sprint they fall in. Danish public holidays
+                    and weekends are striped; Danish tax and property deadlines are
+                    marked. Eclipses, meteor showers, solstices and supermoons visible
+                    from Denmark are drawn in, along with the average Aalborg temperature
+                    for each day and a quote at the head of each month.
+                </p>
+                <p>
+                    Calendar files come from any calendar app's export — in Google
+                    Calendar, Settings → Import &amp; export. Event times are shown in
+                    Copenhagen time.
+                </p>
+            </div>
+        </section>
+
+        <div class="section about" id="about-glyphs">
+            <span class="section__kicker">GlyphClock time</span>
+            <p>
+                The day planners replace clock hours with
+                <a href="https://glyphclock.bang-labs.eu">GlyphClock</a> blocks: sixteen
+                glyphs of 90 minutes each, counted from UTC midnight. Each row shows the
+                local time the glyph starts in the zone you pick. Because most offsets
+                are not a multiple of 90 minutes, the glyphs shift when daylight saving
+                time starts or ends — pick the date you will use the planner on.
+            </p>
+        </div>
+
+        <p class="page__foot">
+            Made by <a href="/">Bang Labs</a>.
+        </p>
+    </main>
+
+    <script src="day.js"></script>
+    <script src="calendar.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

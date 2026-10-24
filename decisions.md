@@ -113,3 +113,22 @@ single-viewport pages that must not scroll. The product pages do scroll, so the
 shared long-form styles (and that override) went into a second stylesheet the two
 of them load on top of `style.css`, rather than growing the hero's sheet with
 rules it never uses.
+
+## 2026-10-24 — `/planners/` runs the Planners repo's tools in the browser
+The Planners repo is private and its tools are a Python/reportlab calendar and
+LuaLaTeX day planners — neither can run on GitHub Pages. The page converts them
+two different ways:
+- **Calendar**: `planners/py/calendar_print.py` and `astro_events.py` are verbatim
+  copies (`make web` in Planners refreshes them) run in Pyodide, with reportlab and
+  icalendar installed by micropip on first use. Calendar feeds can't be fetched from
+  a browser (no CORS on Google's `.ics` URLs), so the page takes `.ics` uploads and
+  feeds them to the unmodified sync code through a stand-in `urlopen`. Private dates
+  and the project timeline are never loaded. The Ghostscript flattening step is skipped.
+- **Day planners**: LaTeX can't run client-side, so the four layouts are ported to
+  HTML/CSS sheets sized in millimetres (`planners/day.js`, `planners.css`) — the
+  preview is the printout, saved to PDF from the print dialog. Glyph rows are computed
+  from any IANA time zone on a chosen date instead of a hard-coded `\utcoffset`.
+  The emoji art is GlyphClock's own (`planners/emoji/`). Edits to the `.tex` layouts
+  do not flow here automatically.
+
+The page loads no `bang.js` and no `i18n.js`, for the same reasons as the product pages.

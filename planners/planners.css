@@ -1,0 +1,415 @@
+/* Planners tool page. Loaded on top of style.css + product.css.
+   Two halves: the dark page UI, and the white `.sheet` pages, which are sized
+   in millimetres and serve as both the preview and the printout. */
+
+.page--tool { max-width: 1100px; }
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+    margin-bottom: 2rem;
+}
+
+.tabs__tab {
+    position: relative;
+    background: none;
+    border: 0;
+    padding: 0.7rem 1rem;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #9ca3b0;
+    cursor: pointer;
+}
+
+.tabs__tab:hover { color: #e0e0e8; }
+.tabs__tab[aria-selected="true"] { color: #c7d2fe; }
+.tabs__tab[aria-selected="true"]::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 2px;
+    background: #6366f1;
+}
+
+/* --- Tool: controls left, preview right --- */
+.tool {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+.tool[hidden] { display: none; }
+.tool > .about { grid-column: 1 / -1; margin: 0; }
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: sticky;
+    top: 1.5rem;
+}
+
+.variants {
+    border: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.variants legend,
+.field > span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6366f1;
+    margin-bottom: 0.5rem;
+}
+
+.field > span small {
+    display: block;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #9ca3b0;
+    margin-top: 0.2rem;
+}
+
+.variant {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.65rem;
+    padding: 0.7rem 0.9rem;
+    background: rgba(18, 18, 28, 0.7);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.variant:hover { border-color: rgba(99, 102, 241, 0.5); }
+.variant:has(input:checked) {
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.12);
+}
+
+.variant input {
+    grid-row: span 2;
+    margin-top: 0.3rem;
+    accent-color: #6366f1;
+}
+
+.variant__name { font-weight: 600; color: #e0e0e8; font-size: 0.95rem; }
+.variant__desc { font-size: 0.825rem; color: #9ca3b0; line-height: 1.45; }
+
+.fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 0.75rem;
+}
+
+.field { display: block; min-width: 0; }
+.field--wide { grid-column: 1 / -1; }
+.field[hidden] { display: none; }
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    background: rgba(10, 10, 18, 0.8);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 8px;
+    color: #e0e0e8;
+    font: inherit;
+    font-size: 0.925rem;
+    color-scheme: dark;
+}
+
+.field textarea {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.825rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.field input[type="file"] { padding: 0.45rem; font-size: 0.825rem; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.field-note {
+    margin-top: -0.4rem;
+    font-size: 0.825rem;
+    line-height: 1.5;
+    color: #9ca3b0;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.actions__hint { flex-basis: 100%; font-size: 0.825rem; line-height: 1.5; color: #9ca3b0; }
+.actions__hint.is-error { color: #fca5a5; }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.3rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn--primary { background: #6366f1; color: #fff; border: 0; }
+.btn--primary:hover { background: #4f46e5; }
+.btn--primary:disabled { opacity: 0.6; cursor: progress; }
+.btn--ghost { border: 1px solid rgba(99, 102, 241, 0.3); color: #c7d2fe; background: none; }
+.btn--ghost:hover { background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.6); }
+.btn[hidden] { display: none; }
+
+/* --- Preview --- */
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+.sheet-frame { position: relative; overflow: hidden; flex: none; }
+.sheet-frame > .sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.preview--pdf iframe {
+    width: 100%;
+    height: min(85vh, 1100px);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.preview[hidden] { display: none; }
+
+.about { margin-top: 1rem; }
+
+@media (max-width: 860px) {
+    .tool { grid-template-columns: minmax(0, 1fr); }
+    .controls { position: static; }
+}
+
+/* =====================================================================
+   Sheets — the printed page. Values follow Planners/day-planner/*.tex.
+   ===================================================================== */
+
+.sheet {
+    --ink: #000;
+    --header: #C8CCD2;
+    --shade: #DEE0E4;
+    --rule: 0.3pt;
+    position: relative;
+    background: #fff;
+    color: var(--ink);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.sheet--a4p { width: 210mm; height: 297mm; }
+.sheet--a4l { width: 297mm; height: 210mm; }
+
+.sheet h2, .sheet h3, .sheet h4 { color: var(--ink); margin: 0; letter-spacing: 0; }
+
+.sheet .spread {
+    display: flex;
+    justify-content: center;
+    gap: 0.6em;
+    font-size: 8pt;
+}
+.sheet .spread--days { gap: 1.1em; }
+
+.sheet .rules { display: flex; flex-direction: column; }
+.sheet .rules i { display: block; border-bottom: var(--rule) solid var(--ink); height: 7mm; }
+
+.sheet .glyph { display: block; width: 6.2mm; height: 6.2mm; margin: auto; }
+
+/* --- A4 portrait layouts (shared, solo) --- */
+.layout-a4 {
+    display: flex;
+    flex-direction: column;
+    padding: 5mm 10mm 4mm;
+}
+
+.a4-head { text-align: center; margin-bottom: 1mm; }
+.a4-head h2 { font-size: 14.4pt; font-weight: 700; margin-bottom: 0.6mm; }
+.a4-head .spread { margin-bottom: 0.4mm; }
+
+.pair { display: flex; justify-content: space-between; }
+.pair > .box { width: 48%; }
+.pair--foot { margin-top: 1mm; }
+
+.box h3 { text-align: center; font-size: 10pt; font-weight: 700; }
+.box h3 .blank {
+    display: inline-block;
+    width: 23mm;
+    border-bottom: 0.4pt solid var(--ink);
+    margin-right: 0.3mm;
+}
+.box .rules { padding-bottom: 2.5mm; }
+.box--solo h3 { margin-top: 0.5mm; }
+
+.sched-wrap { flex: 1; min-height: 0; margin-top: 1mm; }
+
+.sched {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.sched td, .sched th { padding: 0 1mm; vertical-align: middle; }
+
+.sched--half thead th {
+    background: var(--header);
+    font-size: 9pt;
+    font-weight: 700;
+    height: 6mm;
+    text-align: center;
+}
+.sched--half tbody tr.shade td { background: var(--shade); }
+.sched--half tbody td.c-glyph.plain { background: #fff; }
+.sched--half tbody td.c-glyph.shade { background: var(--shade); }
+.sched--half .c-glyph { width: 8mm; text-align: center; }
+.sched--half .c-time { width: 12.5mm; font-size: 9pt; text-align: center; }
+.sched--half .c-pri { width: 5mm; text-align: center; }
+.sched--half .c-shared { width: 22%; }
+.sched--half .c-right { text-align: right; }
+.sched--half .c-dash { border-left: 0.8pt dashed var(--ink); }
+
+/* An empty \bigcirc */
+.sched .pri {
+    display: inline-block;
+    width: 2.6mm;
+    height: 2.6mm;
+    border: 0.4pt solid #444;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+/* --- A4 landscape fold layouts --- */
+.layout-fold, .layout-three { --shade: #E8EAFD; }
+
+/* 3mm margin, 4x2 grid of A7 cells (72.75 x 102mm) */
+.layout-fold .cell, .layout-three .corner, .layout-three .panel { position: absolute; }
+
+.guide { position: absolute; }
+.guide--v1 { left: 50%; top: 1mm; bottom: 1mm; border-left: 0.5pt dashed #8A93A1; }
+.guide--h { top: 50%; left: 1mm; right: 1mm; border-top: 0.35pt dashed #B8BEC8; }
+.guide--v3 { top: 1mm; bottom: 1mm; border-left: 0.3pt dotted #B8BEC8; }
+.guide--q1 { left: 25%; }
+.guide--q3 { left: 75%; }
+
+.cell { height: 102mm; padding: 0 1mm; }
+.cell--top { top: 3mm; }
+.cell--bottom { bottom: 3mm; }
+.cell--wide { left: 3mm; width: 145.5mm; }
+.cell--tl { top: 3mm; }
+.cell--bl { bottom: 3mm; }
+.cell--c3 { left: 148.5mm; width: 72.75mm; }
+.cell--c4 { left: 226.25mm; width: 67.75mm; }
+
+.sched--block tr.shade td { background: var(--shade); }
+.sched--block .c-stack {
+    width: 9mm;
+    padding: 0;
+    text-align: center;
+    border-right: 0.8pt dotted var(--ink);
+    font-size: 7pt;
+}
+.sched--block .c-stack .glyph { width: 4mm; height: 4mm; margin: 0 auto 0.3mm; }
+.cell--wide .sched { height: 96mm; }
+
+.rules--loose { padding-top: 2mm; }
+.rules--loose i { height: 8.1mm; }
+
+.mini-dates .spread { font-size: 5pt; gap: 0.35em; margin-bottom: 0.8mm; }
+.mini-dates .spread--days { gap: 0.9em; }
+.cell--c4 .mini-dates { margin-bottom: 2.5mm; }
+
+.bar-box h4 {
+    background: var(--header);
+    font-size: 9pt;
+    font-weight: 700;
+    height: 6.3mm;
+    line-height: 6.3mm;
+    padding: 0 1.5mm;
+}
+.bar-box .rules i { height: 6.7mm; }
+.bar-box--loose .rules i { height: 8.1mm; }
+
+/* --- 3-day: A5 panels (145.5 x 204mm) and A7 corners (67.75 x 102mm) --- */
+.panel { top: 3mm; width: 145.5mm; height: 204mm; padding: 0 1mm; display: flex; flex-direction: column; }
+.panel--left { left: 3mm; }
+.panel--right { right: 3mm; }
+.panel--center { left: 75.75mm; }
+
+.panel__head { display: flex; gap: 2mm; margin-bottom: 1.5mm; }
+.panel__head > * { flex: 1; min-width: 0; }
+.panel__head .mini-dates .spread { justify-content: flex-start; flex-wrap: wrap; }
+.today span { font-size: 9pt; }
+.today .rules i { height: 6.7mm; }
+.panel .sched { flex: 1; height: auto; }
+
+.corner { width: 67.75mm; height: 102mm; padding: 0 1mm; }
+.corner--tl { top: 3mm; left: 3mm; }
+.corner--tr { top: 3mm; right: 3mm; }
+.corner--bl { bottom: 3mm; left: 3mm; }
+.corner--br { bottom: 3mm; right: 3mm; }
+
+/* =====================================================================
+   Print: only the day-planner sheets, at full size.
+   ===================================================================== */
+@media print {
+    body.printing-day { background: #fff; overflow: visible; }
+    body.printing-day > :not(main),
+    body.printing-day main > :not(#tool-day),
+    body.printing-day #tool-day > :not(#day-preview) { display: none !important; }
+    body.printing-day main.page { padding: 0; max-width: none; margin: 0; }
+    body.printing-day #tool-day { display: block; margin: 0; }
+    body.printing-day #day-preview { display: block; }
+    body.printing-day .sheet-frame {
+        width: auto !important;
+        height: auto !important;
+        overflow: visible;
+        break-after: page;
+    }
+    body.printing-day .sheet-frame:last-child { break-after: auto; }
+    body.printing-day .sheet-frame > .sheet {
+        position: static;
+        transform: none !important;
+        box-shadow: none;
+    }
+}

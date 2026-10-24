@@ -16,6 +16,11 @@
         <priority>0.9</priority>
     </url>
     <url>
+        <loc>https://bang-labs.eu/planners/</loc>
+        <lastmod>2026-10-24</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://presence.bang-labs.eu</loc>
         <lastmod>2026-03-21</lastmod>
         <priority>0.8</priority>
