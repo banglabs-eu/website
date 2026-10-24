@@ -1,0 +1,25 @@
+/* Data tables ported from Planners/calendar_print.py and astro_events.py.
+   Generated from the Python modules on 2026-10-24; edit both sides together. */
+
+export const MONTHLY_QUOTES: Record<number, string> = {"1": "“A bad system will beat a good person every time.” — W. E. Deming", "2": "“I have made this longer because I have not had time to make it shorter.” — Pascal", "3": "“A man sees in the world what he carries in his heart.” — Goethe", "4": "“We can’t control systems or figure them out. But we can dance with them.” — Donella Meadows", "5": "“The most certain sign of wisdom is cheerfulness.” — Montaigne", "6": "“The best way to predict the future is to create it.” — Peter Drucker", "7": "“True eloquence consists in saying all that is necessary, and nothing but what is necessary.” — La Rochefoucauld", "8": "“The purpose of a system is what it does.” — Stafford Beer", "9": "“The righter we do the wrong thing, the wronger we become.” — Russell Ackoff", "10": "“All of man’s problems stem from his inability to sit quietly in a room alone.” — Pascal", "11": "“Knowing is not enough; we must apply. Willing is not enough; we must do.” — Goethe", "12": "“Learning is not compulsory… neither is survival.” — W. E. Deming"};
+
+/** Aalborg monthly mean temperatures, climate normals 1991–2020. */
+export const AALBORG_MONTHLY_TEMPS = [1.4, 1.4, 3.5, 7.5, 11.8, 15.0, 17.0, 16.6, 13.5, 9.2, 5.4, 2.6];
+
+/** Danish civic and tax deadlines: [month, day, text], every year. */
+export const MUNICIPALITY_DEADLINES: [number, number, string][] = [[1, 20, "Ejendomsskat 1. rate"], [3, 1, "Ejendomsvurdering frist"], [5, 1, "Selvangivelse frist"], [7, 1, "Udvidet selvangivelse"], [7, 20, "Ejendomsskat 2. rate"], [9, 1, "Forskudsopgørelse åbner"], [11, 1, "Forskudsopgørelse frist"]];
+
+/** Eclipses: [date, description, visible from Denmark (true | 'partial' | false)]. */
+export const ECLIPSES: [string, string, boolean | 'partial'][] = [["2025-03-14", "Total lunar eclipse", "partial"], ["2025-03-29", "Partial solar eclipse", true], ["2025-09-07", "Total lunar eclipse", true], ["2025-09-21", "Partial solar eclipse", false], ["2026-02-17", "Annular solar eclipse", false], ["2026-03-03", "Total lunar eclipse", false], ["2026-08-12", "Total solar eclipse", "partial"], ["2026-08-28", "Deep partial lunar ecl", true], ["2027-02-06", "Annular solar eclipse", false], ["2027-02-20", "Penumbral lunar ecl", true], ["2027-07-18", "Penumbral lunar ecl", false], ["2027-08-02", "Total solar eclipse", "partial"], ["2027-08-17", "Penumbral lunar ecl", true], ["2028-01-12", "Partial lunar eclipse", true], ["2028-01-26", "Annular solar eclipse", false], ["2028-07-06", "Partial lunar eclipse", "partial"], ["2028-07-22", "Total solar eclipse", false], ["2028-12-31", "Total lunar eclipse", true]];
+
+/** Meteor shower peaks: [month, day, text], every year. */
+export const METEOR_SHOWERS: [number, number, string][] = [[1, 3, "Quadrantids peak"], [4, 22, "Lyrids peak"], [5, 6, "Eta Aquariids peak"], [7, 30, "Delta Aquariids peak"], [8, 12, "Perseids peak"], [10, 21, "Orionids peak"], [11, 17, "Leonids peak"], [12, 14, "Geminids peak"], [12, 22, "Ursids peak"]];
+
+export const SOLSTICES_EQUINOXES: Record<string, string> = {"2025-03-20": "Vernal equinox", "2025-06-21": "Summer solstice", "2025-09-22": "Autumnal equinox", "2025-12-21": "Winter solstice", "2026-03-20": "Vernal equinox", "2026-06-21": "Summer solstice", "2026-09-23": "Autumnal equinox", "2026-12-21": "Winter solstice", "2027-03-20": "Vernal equinox", "2027-06-21": "Summer solstice", "2027-09-23": "Autumnal equinox", "2027-12-22": "Winter solstice", "2028-03-20": "Vernal equinox", "2028-06-20": "Summer solstice", "2028-09-22": "Autumnal equinox", "2028-12-21": "Winter solstice"};
+
+export const SUPERMOONS: Record<string, string> = {"2025-10-07": "Supermoon", "2025-11-05": "Supermoon", "2025-12-04": "Supermoon", "2026-01-03": "Supermoon", "2026-11-24": "Supermoon", "2026-12-24": "Supermoon", "2027-01-22": "Supermoon", "2027-02-20": "Supermoon", "2028-01-12": "Supermoon", "2028-02-10": "Supermoon", "2028-03-11": "Supermoon", "2028-12-31": "Supermoon"};
+
+/** [description, visible from Denmark]. */
+export const NOTABLE_EVENTS: Record<string, [string, boolean]> = {"2025-01-16": ["Mars at opposition", true], "2025-03-23": ["Venus dual visibility", true], "2025-09-21": ["Saturn at opposition", true], "2026-03-08": ["Venus-Saturn conjunct", true], "2026-06-09": ["Venus-Jupiter conjunct", true], "2026-10-15": ["Saturn at opposition", true], "2026-11-21": ["Jupiter at opposition", true], "2027-01-18": ["Mars at opposition", true], "2027-07-01": ["Venus-Mercury conjunct", true], "2027-08-11": ["Venus-Mercury conjunct", true], "2027-10-10": ["Venus-Mercury conjunct", true], "2028-03-12": ["Jupiter at opposition", true], "2028-05-13": ["Mars at opposition", true]};
+
+export const CALENDAR_COLORS: [number, number, number][] = [[0.0, 0.4, 0.8], [0.8, 0.2, 0.0], [0.0, 0.55, 0.3], [0.6, 0.0, 0.6], [0.8, 0.5, 0.0], [0.0, 0.5, 0.5]];

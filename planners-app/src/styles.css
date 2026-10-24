@@ -1,4 +1,4 @@
-/* Planners tool page. Loaded on top of style.css + product.css.
+/* Planners tool page, on top of the site's style.css + product.css (imported in main.tsx).
    Two halves: the dark page UI, and the white `.sheet` pages, which are sized
    in millimetres and serve as both the preview and the printout. */
 
@@ -46,7 +46,6 @@
     margin-bottom: 3rem;
 }
 
-.tool[hidden] { display: none; }
 .tool > .about { grid-column: 1 / -1; margin: 0; }
 
 .controls {
@@ -394,12 +393,12 @@
    ===================================================================== */
 @media print {
     body.printing-day { background: #fff; overflow: visible; }
-    body.printing-day > :not(main),
-    body.printing-day main > :not(#tool-day),
-    body.printing-day #tool-day > :not(#day-preview) { display: none !important; }
+    body.printing-day > :not(#root),
+    body.printing-day main > :not(.tool--day),
+    body.printing-day .tool--day > :not(.preview) { display: none !important; }
     body.printing-day main.page { padding: 0; max-width: none; margin: 0; }
-    body.printing-day #tool-day { display: block; margin: 0; }
-    body.printing-day #day-preview { display: block; }
+    body.printing-day .tool--day { display: block; margin: 0; }
+    body.printing-day .preview { display: block; }
     body.printing-day .sheet-frame {
         width: auto !important;
         height: auto !important;

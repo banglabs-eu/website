@@ -8,7 +8,8 @@ Landing page website for Bang Labs (bang-labs.eu / bang-labs.com) — an open so
 
 ## Tech Stack
 
-- **No framework or build system** — plain HTML, CSS, and vanilla JavaScript
+- **No framework or build system** — plain HTML, CSS, and vanilla JavaScript.
+  The one exception is `/planners/`, a Vite + React + TypeScript app (see below)
 - Static site, no server-side rendering or bundling
 - Hosted as static files (canonical URL: https://bang-labs.eu/)
 
@@ -32,6 +33,13 @@ Landing page website for Bang Labs (bang-labs.eu / bang-labs.com) — an open so
   the product pages deliberately don't load it
 - `projects.js` — The project catalog and its informational modal. An entry's
   `shot` and `about` are both optional; `about` adds a second modal action
+- `planners-app/` — **source** of bang-labs.eu/planners/: printable GlyphClock
+  day planners (HTML sheets, printed via the browser) and a calendar PDF
+  generator (pdf-lib). `cd planners-app && npm install && npm run build` writes
+  `planners/`; edit the app, then commit both. `npm run dev` serves it locally
+  (the site's `style.css`/`product.css` are imported from the repo root)
+- `planners/` — **build output** of `planners-app/`, committed because GitHub
+  Pages serves this repo's files as-is. Never edit it by hand
 - `robots.txt` / `sitemap.xml` — SEO assets
 - `CLAUDE.md` — This file
 

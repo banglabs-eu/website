@@ -114,21 +114,29 @@ shared long-form styles (and that override) went into a second stylesheet the tw
 of them load on top of `style.css`, rather than growing the hero's sheet with
 rules it never uses.
 
-## 2026-10-24 — `/planners/` runs the Planners repo's tools in the browser
-The Planners repo is private and its tools are a Python/reportlab calendar and
-LuaLaTeX day planners — neither can run on GitHub Pages. The page converts them
-two different ways:
-- **Calendar**: `planners/py/calendar_print.py` and `astro_events.py` are verbatim
-  copies (`make web` in Planners refreshes them) run in Pyodide, with reportlab and
-  icalendar installed by micropip on first use. Calendar feeds can't be fetched from
-  a browser (no CORS on Google's `.ics` URLs), so the page takes `.ics` uploads and
-  feeds them to the unmodified sync code through a stand-in `urlopen`. Private dates
-  and the project timeline are never loaded. The Ghostscript flattening step is skipped.
-- **Day planners**: LaTeX can't run client-side, so the four layouts are ported to
-  HTML/CSS sheets sized in millimetres (`planners/day.js`, `planners.css`) — the
-  preview is the printout, saved to PDF from the print dialog. Glyph rows are computed
-  from any IANA time zone on a chosen date instead of a hard-coded `\utcoffset`.
-  The emoji art is GlyphClock's own (`planners/emoji/`). Edits to the `.tex` layouts
-  do not flow here automatically.
+## 2026-10-24 — `/planners/` is a Vite + React app with the calendar ported to TypeScript
+First shipped the same day as vanilla JS running `calendar_print.py` in Pyodide;
+the owner asked for a React app instead, with the calendar ported to TypeScript.
+- **Build**: source in `planners-app/`, output in `planners/`. GitHub Pages here
+  serves the branch as-is (no Actions workflow), so the built files are
+  committed rather than adding a deploy pipeline for one page.
+- **Calendar**: `planners-app/src/calendar/` ports Planners' `calendar_print.py`
+  and `astro_events.py` (data tables in `data.ts` were generated from the Python
+  modules). Drawing goes through pdf-lib behind a small reportlab-shaped
+  `Canvas`, so the geometry follows the Python call for call; verified
+  pixel-identical against reportlab output at 80 dpi for both layouts. Changes to
+  the Python calendar must be mirrored here by hand.
+- **Fonts**: Helvetica is the PDF standard font, as in reportlab; characters it
+  cannot encode (emoji, CJK in event names) are dropped. The kanji day headers
+  use an eight-glyph Noto Sans CJK JP subset (OFL), converted to TrueType
+  outlines because pdf-lib labels embedded CFF fonts as TrueType.
+- **.ics instead of feed URLs**: browsers cannot fetch Google's iCal links (no
+  CORS), so the page takes exported files. Recurring events show on their first
+  date only, as in the Python version. Private dates and the project timeline
+  never reach the page.
+- **Day planners**: the LaTeX layouts are HTML sheets sized in millimetres
+  (`Sheets.tsx`); the preview is the printout. Glyph rows come from any IANA zone
+  on a chosen date rather than a fixed `\utcoffset`. Emoji art is GlyphClock's.
+- pdf-lib is ~1.1 MB, so it is a lazy chunk loaded on the first calendar draw.
 
 The page loads no `bang.js` and no `i18n.js`, for the same reasons as the product pages.
