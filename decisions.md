@@ -147,7 +147,8 @@ large as possible on one sheet. `planners-app/src/day/Range.tsx` tries both A4
 orientations and every grid shape and keeps the one with the largest box area.
 Pure area would pick hair-thin boxes for short spans, so area is discounted once a
 box is thinner than 1:3. With "weekdays in columns" (the default) the shape is
-fixed at 7 columns, so a single week is the classic 7-column landscape sheet even
-though its boxes are thinner than that. Span is capped at 62 days; beyond that,
+fixed at 7 columns — except inside a single Mon–Sun week, where seven columns
+are slivers: a full week is a 2×4 portrait grid with a Notes box in the eighth
+slot (owner's call), and part of a week flows into the best-fitting grid. Span is capped at 62 days; beyond that,
 boxes get too small to write in. The writing lines and cell edges are real
 elements, not CSS gradients: Chrome dropped the gradient lines when printing to PDF.

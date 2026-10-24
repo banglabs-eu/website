@@ -29,6 +29,8 @@ export interface RangePlan {
     rows: number;
     /** Grid slots in reading order; null is an empty slot before/after the span. */
     slots: (Day | null)[];
+    /** Slot holding a Notes box instead of a day, if any. */
+    notes?: number;
 }
 
 const parse = (iso: string): [number, number, number] => iso.split('-').map(Number) as [number, number, number];
@@ -57,6 +59,13 @@ function score(w: number, h: number): number {
  * whichever columns × rows fits best. Portrait wins ties.
  */
 export function planRange(days: Day[], weekColumns: boolean): RangePlan {
+    // Inside one Mon–Sun week, weekday columns are just slivers. A full week
+    // gets the classic 2×4 portrait grid with Notes in the eighth box; part of
+    // a week flows into whichever grid gives the biggest boxes.
+    if (weekColumns && days[0].wd + days.length <= 7) {
+        if (days.length === 7) return { orientation: 'portrait', cols: 2, rows: 4, slots: [...days, null], notes: 7 };
+        weekColumns = false;
+    }
     let best: RangePlan | null = null;
     let bestScore = -1;
     for (const orientation of ['portrait', 'landscape'] as Orientation[]) {
@@ -115,19 +124,28 @@ export function RangeSheet({ title, plan }: { title: string; plan: RangePlan }) 
             <h2 className="range-title">{title}</h2>
             <div className="range-grid" style={{ gridTemplateColumns: `repeat(${plan.cols}, 1fr)`, gridTemplateRows: `repeat(${plan.rows}, 1fr)` }}>
                 {plan.slots.map((day, i) => {
+                    const filled = (j: number) => Boolean(plan.slots[j]) || j === plan.notes;
+                    // Each box draws its right and bottom edge, plus top/left where no box neighbours it.
+                    const edges = [
+                        (i < plan.cols || !filled(i - plan.cols)) && 'range-day--top',
+                        (i % plan.cols === 0 || !filled(i - 1)) && 'range-day--left',
+                    ];
+                    if (i === plan.notes) {
+                        return (
+                            <div key={i} className={['range-day', ...edges].filter(Boolean).join(' ')}>
+                                <div className="range-day__head"><b>Notes</b></div>
+                                <div className="range-day__rules">{RULES}</div>
+                            </div>
+                        );
+                    }
                     if (!day) return <div key={i} />;
                     const first = i === 0 || plan.slots[i - 1] === null;
                     const weekStart = day.wd === 0 || first;
                     const holiday = holidays.get(day.key);
                     const showMonth = day.d === 1 || first;
-                    // Each box draws its right and bottom edge, plus top/left where no box neighbours it.
-                    const edges = [
-                        (i < plan.cols || !plan.slots[i - plan.cols]) && 'range-day--top',
-                        (i % plan.cols === 0 || !plan.slots[i - 1]) && 'range-day--left',
-                        (day.wd >= 5 || holiday) && 'range-day--off',
-                    ].filter(Boolean).join(' ');
+                    const off = (day.wd >= 5 || holiday) && 'range-day--off';
                     return (
-                        <div key={i} className={`range-day ${edges}`}>
+                        <div key={i} className={['range-day', ...edges, off].filter(Boolean).join(' ')}>
                             <div className="range-day__head">
                                 <b>{WEEKDAYS[day.wd]} {day.d}{showMonth && ` ${MONTHS[day.m - 1]}`}</b>
                                 {holiday && <span className="range-day__holiday">{holiday}</span>}
