@@ -71,7 +71,7 @@
             icon: '{✎}',
             name: 'Planners',
             blurb: 'Print the day you plan.',
-            description: 'Paper day planners laid out in GlyphClock blocks instead of clock hours — for one person, for two with a shared column, or folded into a pocket-sized booklet — with every glyph placed for your own time zone. Plus a four-month calendar with Danish holidays, sky events, your own dates and any calendar you export as .ics. Everything is drawn in your browser; nothing you enter leaves it.',
+            description: 'Paper day planners laid out in GlyphClock blocks instead of clock hours — for one person, for two with a shared column, or folded into a pocket-sized booklet — with every glyph placed for your own time zone. A week or month on one sheet, every day as large as it fits. Plus a four-month calendar with Danish holidays, sky events, your own dates and any calendar you export as .ics. Everything is drawn in your browser; nothing you enter leaves it.',
             shot: 'screenshots/planners.webp',
             url: '/planners/',
             openLabel: 'Open Planners'

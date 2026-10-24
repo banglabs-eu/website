@@ -2,8 +2,9 @@
    sized in millimetres, so it is both the on-screen preview and the printout. */
 import type { ReactNode } from 'react';
 import { GLYPHS, blockRows, halfHourRows, type BlockRow } from './glyphs';
+import { RangeSheet, daysBetween, defaultTitle, planRange } from './Range';
 
-export type Variant = 'shared' | 'solo' | 'fold' | 'three';
+export type Variant = 'shared' | 'solo' | 'fold' | 'three' | 'range';
 
 export interface DayOptions {
     variant: Variant;
@@ -15,6 +16,9 @@ export interface DayOptions {
     endHour: number;
     dayStart: number;
     pages: number;
+    rangeStart: string;
+    rangeEnd: string;
+    weekColumns: boolean;
 }
 
 export const LAYOUTS: Record<Variant, { orientation: 'portrait' | 'landscape'; title: string }> = {
@@ -22,7 +26,18 @@ export const LAYOUTS: Record<Variant, { orientation: 'portrait' | 'landscape'; t
     solo: { orientation: 'portrait', title: 'Day Plan' },
     fold: { orientation: 'landscape', title: 'Day Plan' },
     three: { orientation: 'landscape', title: '3-Day Plan' },
+    // Its orientation is chosen per span; see orientationFor.
+    range: { orientation: 'portrait', title: '' },
 };
+
+const rangePlan = (o: DayOptions) => {
+    const days = daysBetween(o.rangeStart, o.rangeEnd);
+    return days.length ? { days, plan: planRange(days, o.weekColumns) } : null;
+};
+
+export function orientationFor(o: DayOptions): 'portrait' | 'landscape' {
+    return o.variant === 'range' ? rangePlan(o)?.plan.orientation ?? 'portrait' : LAYOUTS[o.variant].orientation;
+}
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -187,7 +202,11 @@ const ThreeB = ({ o }: { o: DayOptions }) => (
 
 /** All sheets for the options, in print order. */
 export function sheetsFor(o: DayOptions): ReactNode[] {
+    if (o.variant === 'range') {
+        const r = rangePlan(o);
+        return r ? [<RangeSheet key="r" title={o.title || defaultTitle(r.days)} plan={r.plan} />] : [];
+    }
     if (o.variant === 'three') return [<ThreeA key="a" o={o} />, <ThreeB key="b" o={o} />];
-    const Page = { shared: Shared, solo: Solo, fold: Fold }[o.variant];
+    const Page = { shared: Shared, solo: Solo, fold: Fold }[o.variant as 'shared' | 'solo' | 'fold'];
     return range(1, o.pages).map(p => <Page key={p} o={o} />);
 }

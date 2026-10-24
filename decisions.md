@@ -140,3 +140,14 @@ the owner asked for a React app instead, with the calendar ported to TypeScript.
 - pdf-lib is ~1.1 MB, so it is a lazy chunk loaded on the first calendar draw.
 
 The page loads no `bang.js` and no `i18n.js`, for the same reasons as the product pages.
+
+## 2026-10-24 — Week & month planner: biggest boxes, but never thinner than 1:3
+The owner asked for a planner over any start/end date, with each day's box as
+large as possible on one sheet. `planners-app/src/day/Range.tsx` tries both A4
+orientations and every grid shape and keeps the one with the largest box area.
+Pure area would pick hair-thin boxes for short spans, so area is discounted once a
+box is thinner than 1:3. With "weekdays in columns" (the default) the shape is
+fixed at 7 columns, so a single week is the classic 7-column landscape sheet even
+though its boxes are thinner than that. Span is capped at 62 days; beyond that,
+boxes get too small to write in. The writing lines and cell edges are real
+elements, not CSS gradients: Chrome dropped the gradient lines when printing to PDF.

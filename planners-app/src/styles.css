@@ -412,3 +412,75 @@
         box-shadow: none;
     }
 }
+
+/* --- Week & month (range) --- */
+.presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: -0.25rem; }
+.chip {
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    background: none;
+    color: #c7d2fe;
+    font: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.chip:hover { background: rgba(99, 102, 241, 0.12); border-color: rgba(99, 102, 241, 0.6); }
+
+.check {
+    display: flex;
+    gap: 0.55rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #c3c3cf;
+    cursor: pointer;
+}
+.check input { accent-color: #6366f1; }
+
+/* 8mm margins, 12mm title band — Range.tsx sizes its grid from the same numbers. */
+.layout-range { display: flex; flex-direction: column; padding: 8mm; }
+.range-title {
+    height: 12mm;
+    font-size: 14.4pt;
+    font-weight: 700;
+    line-height: 9mm;
+    text-align: center;
+}
+.range-grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+}
+.range-day {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border-right: 0.8pt solid var(--ink);
+    border-bottom: 0.8pt solid var(--ink);
+}
+.range-day--top { border-top: 0.8pt solid var(--ink); }
+.range-day--left { border-left: 0.8pt solid var(--ink); }
+.range-day--off { background: #F5F6FE; }
+.range-day--off .range-day__head { background: #E8EAFD; }
+.range-day__head {
+    display: flex;
+    flex: none;
+    align-items: baseline;
+    gap: 1.5mm;
+    height: 6.5mm;
+    padding: 1.2mm 1.5mm 0;
+    font-size: 9pt;
+    white-space: nowrap;
+}
+.range-day__holiday {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 7pt;
+    color: #555;
+}
+.range-day__week { margin-left: auto; font-size: 7pt; color: #777; }
+.range-day__rules { flex: 1; min-height: 0; overflow: hidden; padding: 0 1.5mm; }
+.range-day__rules i { display: block; height: 7mm; border-bottom: 0.3pt solid #B8BEC8; }
